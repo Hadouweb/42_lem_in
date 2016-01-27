@@ -10,6 +10,8 @@ HEADER = -I $(LIBFT)/includes -I $(INCPATH)/
 LIB = $(LIBFT)/libft.a
 
 SRC = 	$(SRCPATH)/main.c\
+		$(SRCPATH)/get_next_line.c\
+		$(SRCPATH)/ft_save_data.c\
 
 OBJ = $(SRC:.c=.o)
 
