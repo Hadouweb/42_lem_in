@@ -26,12 +26,20 @@ typedef struct		s_lst
 	char			*str;
 }					t_lst;
 
+typedef struct 		s_link
+{
+	int 			step;
+	struct s_node	*node;
+	struct s_link	*next;
+}					t_link;
+
 typedef	struct  	s_node
 {
 	char			*name;
 	int				x;
 	int				y;
-	struct s_node	**next;
+	struct s_node	*next;
+	struct s_link	*link;
 }					t_node;
 
 typedef struct 		s_data
@@ -56,6 +64,7 @@ int 				ft_is_node(t_lst *l);
 void				ft_parse_data(t_lst *l);
 int 				ft_is_cmd(char *str);
 void 				ft_special_cmd(t_lst *l, t_data *d);
+t_node				*ft_create_node(char *str);
 
 void				ft_print_data(t_data d);
 
