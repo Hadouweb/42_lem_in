@@ -12,6 +12,9 @@ LIB = $(LIBFT)/libft.a
 SRC = 	$(SRCPATH)/main.c\
 		$(SRCPATH)/get_next_line.c\
 		$(SRCPATH)/ft_save_data.c\
+		$(SRCPATH)/ft_parse_data.c\
+		$(SRCPATH)/ft_error.c\
+		$(SRCPATH)/ft_util.c\
 
 OBJ = $(SRC:.c=.o)
 

@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-t_lst	*ft_create_node(char *str)
+t_lst	*ft_create_line(char *str)
 {
 	t_lst	*list;
 
@@ -18,8 +18,8 @@ void	ft_list_push_back(t_lst **l, char *str)
 	{
 		while (list->next)
 			list = list->next;
-		list->next = ft_create_node(str);
+		list->next = ft_create_line(str);
 	}
 	else
-		*l = ft_create_node(str);
+		*l = ft_create_line(str);
 }

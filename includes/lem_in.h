@@ -44,7 +44,19 @@ typedef struct 		s_data
 }					t_data;
 
 int					get_next_line(int const fd, char **line);
-t_lst				*ft_create_node(char *str);
+t_lst				*ft_create_line(char *str);
 void				ft_list_push_back(t_lst **l, char *str);
+
+void				ft_error(void);
+void 				ft_is_ant(char *str, t_data *d);
+int 				ft_is_name(char *str, int i);
+int 				ft_is_number(char *str, int i);
+int 				ft_is_node(t_lst *l);
+
+void				ft_parse_data(t_lst *l);
+int 				ft_is_cmd(char *str);
+void 				ft_special_cmd(t_lst *l, t_data *d);
+
+void				ft_print_data(t_data d);
 
 #endif
