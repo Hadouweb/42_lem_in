@@ -1,24 +1,36 @@
 #include "lem_in.h"
 
-void	ft_error(void)
+void	ft_error(char *str, char *data)
 {
-	ft_putstr("Error\n");
+	ft_putstr("Error : ");
+	ft_putstr(str);
+	if (data)
+	{
+		ft_putstr(" -> ");
+		ft_putstr(data);
+	}
+	ft_putchar('\n');
 	exit(1);
 }
 
 void 	ft_is_ant(char *str, t_data *d)
 {
-	int 	i;
+	int 		i;
+	long long	nbr;
 
 	i = 0;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
-			ft_error();
-		else
-			d->ant = ft_atoi(str);
+			ft_error("The number of ant is invalid", str);
 		i++;
 	}
+
+	nbr = ft_atoi(str);
+	if (!(nbr > 0 && nbr <= 2147483647))
+		ft_error("The number of ant is invalid", str);
+	else
+		d->ant = nbr;
 }
 
 int 	ft_is_name(char *str, int i)
@@ -55,7 +67,7 @@ int 	ft_is_number(char *str, int i)
 	return (ret);
 }
 
-int 	ft_is_node(t_lst *l)
+int 	ft_is_node(char *str)
 {
 	int 	i;
 	int 	s;
@@ -66,18 +78,18 @@ int 	ft_is_node(t_lst *l)
 	j = 2;
 	s = 0;
 	ret = 0;
-	if (l && l->str)
+	if (*str)
 	{
-		if ((ret = ft_is_name(l->str, i)) == 0)
+		if ((ret = ft_is_name(str, i)) == 0)
 			return (0);
 		i += ret;
-		if ((ret = ft_is_number(l->str, i)) == 0)
+		if ((ret = ft_is_number(str, i)) == 0)
 			return (0);
 		i += ret;
-		if ((ret = ft_is_number(l->str, i)) == 0)
+		if ((ret = ft_is_number(str, i)) == 0)
 			return (0);
 		i += ret;
-		if (l->str[i])
+		if (str[i])
 			return (0);
 	}
 	else
