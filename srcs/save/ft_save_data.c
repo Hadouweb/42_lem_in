@@ -6,12 +6,12 @@ void 	ft_special_cmd(t_lst *l, t_data *d)
 	{
 		if (!ft_is_node(l->next->str))
 			ft_error();
-		d->start = l->next->str;
+		d->start = ft_create_node(l->next->str);
 	}
 	else if (ft_strcmp(l->str, "##end") == 0)
 	{
 		if (!ft_is_node(l->next->str))
 			ft_error();
-		d->end = ft_strdup(l->next->str);
+		d->end = ft_create_node(l->next->str);
 	}
 }

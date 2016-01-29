@@ -40,9 +40,9 @@ void	ft_print_data(t_data d)
 	ft_putnbr(d.ant);
 
 	ft_putstr("\n[START] : ");
-	ft_putstr(d.start);
+	ft_print_node(d.start);
 	ft_putstr("\n[END] : ");
-	ft_putstr(d.end);
+	ft_print_node(d.end);
 
 	ft_putstr("\n[ROOMS]");
 	while (g)
