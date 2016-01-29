@@ -20,11 +20,14 @@ int		main(int ac, char **av)
 	ac = 1;
 	fd = open(av[1], O_RDONLY);
 	ft_init_data(&d);
-	while (get_next_line(fd, &line) > 0)
+	while (get_next_line(0, &line) > 0)
 	{
-		ft_list_push_back(&lst, line);
+		//ft_list_push_back(&lst, line);
+		//ft_putstr(line);
+		//ft_putchar('\n');
 		ft_strdel(&line);
 	}
-	ft_parse_data(&lst, &d);
+	printf("ok\n");
+	//ft_parse_data(&lst, &d);
 	return (0);
 }

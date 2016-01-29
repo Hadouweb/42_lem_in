@@ -1,5 +1,28 @@
 #include "lem_in.h"
 
+void	ft_verif_double(t_data *d)
+{
+	t_node	*n;
+	t_node	*r;
+	int 	i;
+
+	n = d->graph;
+	while (n)
+	{
+		r = d->graph;
+		i = 0;
+		while (r)
+		{
+			if (ft_strcmp(n->name, r->name) == 0)
+				i++;
+			r = r->next;
+		}
+		if (i > 1)
+			printf("ERROR\n");
+		n = n->next;
+	}
+}
+
 void	ft_parse_data(t_lst **l, t_data *d)
 {
 	int 	i;
@@ -13,7 +36,7 @@ void	ft_parse_data(t_lst **l, t_data *d)
 	m = 0;
 	while (lst)
 	{
-		printf("%s [%d]\n", lst->str, i);
+		//printf("%s [%d]\n", lst->str, i);
 
 		if (i == 0)
 			ft_is_ant(lst->str, d);
@@ -30,5 +53,6 @@ void	ft_parse_data(t_lst **l, t_data *d)
 		lst = lst->next;
 		i++;
 	}
+	ft_verif_double(d);
 	ft_print_data(*d);
 }
