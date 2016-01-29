@@ -46,8 +46,8 @@ typedef struct 		s_data
 {
 	int				ant;
 	t_node			*graph;
-	t_node			*start;
-	t_node			*end;
+	char			*start;
+	char			*end;
 }					t_data;
 
 int					get_next_line(int const fd, char **line);
@@ -60,7 +60,7 @@ int 				ft_is_name(char *str, int i);
 int 				ft_is_number(char *str, int i);
 int 				ft_is_node(char *str);
 
-void				ft_parse_data(t_lst *l);
+void				ft_parse_data(t_lst **l, t_data *d);
 int 				ft_is_cmd(char *str);
 void 				ft_special_cmd(t_lst *l, t_data *d);
 t_node				*ft_create_node(char *str);

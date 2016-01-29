@@ -23,6 +23,7 @@ void	ft_push_node(char *str, t_node **graph)
 	t_node	*n;
 
 	n = *graph;
+	printf("%p\n", graph);
 	if (n)
 	{
 		while (n->next)
@@ -102,42 +103,37 @@ int 	ft_is_link(char *str, t_node *graph)
 			return (0);
 	}
 	ft_push_link(n_parent, n_child);
+	ft_push_link(n_child, n_parent);
 	return (1);
 }
 
-void	ft_init_data(t_data *d)
-{
-	d->ant = 0;
-	d->graph = NULL;
-	d->start = NULL;
-	d->end = NULL;
-}
-
-void	ft_parse_data(t_lst *l)
+void	ft_parse_data(t_lst **l, t_data *d)
 {
 	int 	i;
 	int 	cmd;
-	t_data	d;
+	t_lst	*lst;
 
 	i = 0;
 	cmd = 0;
-	ft_init_data(&d);
-	while (l)
+	lst = *l;
+	printf("%p\n", &d->graph);
+	while (lst)
 	{
-		printf("%s [%d]\n", l->str, i);
+		//printf("%s [%d]\n", lst->str, i);
 
 		if (i == 0)
-			ft_is_ant(l->str, &d);
-		else if (ft_is_cmd(l->str) == 2)
-			ft_special_cmd(l, &d);
-		else if (ft_is_node(l->str))
-			ft_push_node(l->str, &d.graph);
-		else if (ft_is_link(l->str, d.graph))
-			;
-		l = l->next;
+			ft_is_ant(lst->str, d);
+		else if (ft_is_cmd(lst->str) == 2)
+			ft_special_cmd(lst, d);
+		else if (ft_is_node(lst->str))
+			ft_push_node(lst->str, &d->graph);
+		//else if (ft_is_link(lst->str, d.graph))
+		//	;
+		lst = lst->next;
 		i++;
 	}
-	ft_print_data(d);
+	printf("%p\n", &d->graph);
+	ft_print_data(*d);
 }
 
 int 	ft_is_cmd(char *str)
@@ -156,12 +152,12 @@ void 	ft_special_cmd(t_lst *l, t_data *d)
 	{
 		if (!ft_is_node(l->next->str))
 			ft_error("The ##start room is invalid", l->next->str);
-		d->start = ft_create_node(l->next->str);
+		d->start = ft_strdup(l->str);
 	}
 	else if (ft_strcmp(l->str, "##end") == 0)
 	{
 		if (!ft_is_node(l->next->str))
 			ft_error("The ##end room is invalid", l->next->str);
-		d->end = ft_create_node(l->next->str);
+		d->end = ft_strdup(l->str);
 	}
 }
