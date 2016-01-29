@@ -151,12 +151,12 @@ void 	ft_special_cmd(t_lst *l, t_data *d)
 	{
 		if (!ft_is_node(l->next->str))
 			ft_error("The ##start room is invalid", l->next->str);
-		d->start = ft_strdup(l->str);
+		d->start = l->next->str);
 	}
 	else if (ft_strcmp(l->str, "##end") == 0)
 	{
 		if (!ft_is_node(l->next->str))
 			ft_error("The ##end room is invalid", l->next->str);
-		d->end = ft_strdup(l->str);
+		d->end = ft_strdup(l->next->str);
 	}
 }
