@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-/*void	ft_print_node(t_node *n)
+void	ft_print_node(t_node *n)
 {
 	t_link	*link;
 	t_node	*child;
@@ -21,13 +21,13 @@
 		ft_putstr(child->name);
 		if (link->next_l)
 			ft_putchar(',');
-		//ft_putchar(' ');
-		//ft_putnbr(child->x);
-		//ft_putchar(' ');
-		//ft_putnbr(child->y);
+	//	ft_putchar(' ');
+	//	ft_putnbr(child->x);
+	//	ft_putchar(' ');
+	//	ft_putnbr(child->y);
 		link = link->next_l;
 	}
-}*/
+}
 
 void	ft_print_data(t_data d)
 {
@@ -48,7 +48,7 @@ void	ft_print_data(t_data d)
 	while (g)
 	{
 		ft_putchar('\n');
-	//	ft_print_node(g);
+		ft_print_node(g);
 		g = g->next;
 	}
 }

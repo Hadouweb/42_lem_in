@@ -23,7 +23,6 @@ void	ft_push_node(char *str, t_node **graph)
 	t_node	*n;
 
 	n = *graph;
-	printf("%p\n", graph);
 	if (n)
 	{
 		while (n->next)
@@ -102,6 +101,8 @@ int 	ft_is_link(char *str, t_node *graph)
 		if ((n_child = ft_is_saved_room(child, graph)) == NULL)
 			return (0);
 	}
+	ft_strdel(&parent);
+	ft_strdel(&child);
 	ft_push_link(n_parent, n_child);
 	ft_push_link(n_child, n_parent);
 	return (1);
@@ -116,10 +117,9 @@ void	ft_parse_data(t_lst **l, t_data *d)
 	i = 0;
 	cmd = 0;
 	lst = *l;
-	printf("%p\n", &d->graph);
 	while (lst)
 	{
-		//printf("%s [%d]\n", lst->str, i);
+		printf("%s [%d]\n", lst->str, i);
 
 		if (i == 0)
 			ft_is_ant(lst->str, d);
@@ -127,12 +127,11 @@ void	ft_parse_data(t_lst **l, t_data *d)
 			ft_special_cmd(lst, d);
 		else if (ft_is_node(lst->str))
 			ft_push_node(lst->str, &d->graph);
-		//else if (ft_is_link(lst->str, d.graph))
-		//	;
+		else if (ft_is_link(lst->str, d->graph))
+			;
 		lst = lst->next;
 		i++;
 	}
-	printf("%p\n", &d->graph);
 	ft_print_data(*d);
 }
 
