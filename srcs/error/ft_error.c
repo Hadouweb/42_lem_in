@@ -2,7 +2,7 @@
 
 void	ft_error()
 {
-	ft_putstr("Error : ");
+	ft_putstr("Error\n");
 	exit(1);
 }
 

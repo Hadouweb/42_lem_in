@@ -74,4 +74,6 @@ void				ft_push_link(t_node *parent, t_node *child);
 
 int 				ft_is_link(char *str, t_node *graph);
 
+void				ft_verif_double(t_lst *lst);
+
 #endif

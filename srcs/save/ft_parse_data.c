@@ -1,25 +1,48 @@
 #include "lem_in.h"
 
-void	ft_verif_double(t_data *d)
+void	ft_verif_double(t_lst *lst)
 {
-	t_node	*n;
+	t_lst	*l;
+	t_lst	*r;
+	int 	i;
+
+	l = lst;
+	while (l)
+	{
+		r = lst;
+		i = 0;
+		while (r)
+		{
+			if (ft_strcmp(l->str, r->str) == 0 && (l->str[0] != '#' || ft_is_cmd(l->str) == 2))
+				i++;
+			r = r->next;
+		}
+		if (i > 1)
+			ft_error();
+		l = l->next;
+	}
+}
+
+void	ft_verif_double_name(t_data *d)
+{
+	t_node	*l;
 	t_node	*r;
 	int 	i;
 
-	n = d->graph;
-	while (n)
+	l = d->graph;
+	while (l)
 	{
 		r = d->graph;
 		i = 0;
 		while (r)
 		{
-			if (ft_strcmp(n->name, r->name) == 0)
+			if (ft_strcmp(l->name, r->name) == 0)
 				i++;
 			r = r->next;
 		}
 		if (i > 1)
-			printf("ERROR\n");
-		n = n->next;
+			ft_error();
+		l = l->next;
 	}
 }
 
@@ -36,7 +59,7 @@ void	ft_parse_data(t_lst **l, t_data *d)
 	m = 0;
 	while (lst)
 	{
-		//printf("%s [%d]\n", lst->str, i);
+		printf("%s [%d]\n", lst->str, i);
 
 		if (i == 0)
 			ft_is_ant(lst->str, d);
@@ -53,6 +76,6 @@ void	ft_parse_data(t_lst **l, t_data *d)
 		lst = lst->next;
 		i++;
 	}
-	ft_verif_double(d);
+	ft_verif_double_name(d);
 	ft_print_data(*d);
 }

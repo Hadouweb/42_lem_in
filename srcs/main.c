@@ -22,12 +22,10 @@ int		main(int ac, char **av)
 	ft_init_data(&d);
 	while (get_next_line(0, &line) > 0)
 	{
-		//ft_list_push_back(&lst, line);
-		//ft_putstr(line);
-		//ft_putchar('\n');
+		ft_list_push_back(&lst, line);
 		ft_strdel(&line);
 	}
-	printf("ok\n");
-	//ft_parse_data(&lst, &d);
+	ft_verif_double(lst);
+	ft_parse_data(&lst, &d);
 	return (0);
 }
