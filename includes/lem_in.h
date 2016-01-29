@@ -54,7 +54,7 @@ int					get_next_line(int const fd, char **line);
 t_lst				*ft_create_line(char *str);
 void				ft_list_push_back(t_lst **l, char *str);
 
-void				ft_error(char *str, char *data);
+void				ft_error(void);
 void 				ft_is_ant(char *str, t_data *d);
 int 				ft_is_name(char *str, int i);
 int 				ft_is_number(char *str, int i);
@@ -66,5 +66,12 @@ void 				ft_special_cmd(t_lst *l, t_data *d);
 t_node				*ft_create_node(char *str);
 
 void				ft_print_data(t_data d);
+
+t_node				*ft_create_node(char *str);
+void				ft_push_node(char *str, t_node **graph);
+t_link				*ft_create_link(t_node *child);
+void				ft_push_link(t_node *parent, t_node *child);
+
+int 				ft_is_link(char *str, t_node *graph);
 
 #endif

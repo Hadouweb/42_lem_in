@@ -8,10 +8,10 @@ void	ft_print_node(t_node *n)
 	link = n->link;
 	child = NULL;
 	ft_putstr(n->name);
-	//ft_putchar(' ');
-	//ft_putnbr(n->x);
-	//ft_putchar(' ');
-	//ft_putnbr(n->y);
+	ft_putchar(' ');
+	ft_putnbr(n->x);
+	ft_putchar(' ');
+	ft_putnbr(n->y);
 
 	if (link)
 		ft_putstr(" -> ");
@@ -19,12 +19,12 @@ void	ft_print_node(t_node *n)
 	{
 		child = link->node;
 		ft_putstr(child->name);
+		ft_putchar(' ');
+		ft_putnbr(child->x);
+		ft_putchar(' ');
+		ft_putnbr(child->y);
 		if (link->next_l)
-			ft_putchar(',');
-	//	ft_putchar(' ');
-	//	ft_putnbr(child->x);
-	//	ft_putchar(' ');
-	//	ft_putnbr(child->y);
+			ft_putstr(", ");
 		link = link->next_l;
 	}
 }

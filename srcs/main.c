@@ -26,6 +26,5 @@ int		main(int ac, char **av)
 		ft_strdel(&line);
 	}
 	ft_parse_data(&lst, &d);
-	sleep(5);
 	return (0);
 }
