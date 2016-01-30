@@ -51,19 +51,12 @@ t_node	*ft_get_best_node(t_node *node, t_node *start, t_node *end)
 	t_node	*best;
 
 	link = node->link;
-	//printf("_____________\n");
-	//ft_print_node(node);
-	//printf("\n");
 	best = NULL;
 	if (node->link)
 	{
 		best = NULL;
 		while (link && !best)
 		{
-		//	ft_print_node(link->node);
-		//	printf("%d \n", link->node->nb_ant);
-		//	printf("%s %s \n", link->node->name, start->name);
-		//	printf("%d %d\n", link->node->dist, node->dist);
 			if (link->node->nb_ant == 0 && ft_strcmp(link->node->name, start->name) != 0 && link->node->dist != 0 &&
 				(ft_strcmp(node->name, start->name) == 0 || link->node->dist < node->dist))
 				best = link->node;
@@ -71,22 +64,69 @@ t_node	*ft_get_best_node(t_node *node, t_node *start, t_node *end)
 				return (link->node);
 			link = link->next_l;
 		}
-		//ft_print_node(best);
 		link = node->link;
 		if (best)
 		{
 			while (link)
 			{
-			//	printf("ok\n");
 				if (link->node->nb_ant == 0 && ft_strcmp(link->node->name, start->name) != 0 &&
 					link->node->dist < best->dist && link->node->dist != 0)
 					best = link->node;
 				link = link->next_l;
 			}
-		//	if (ft_strcmp(node->name, start->name) == 0 && best->dist > start->nb_ant)
-		//		best = NULL;
 		}
-		//ft_print_node(best);
+	}
+	return (best);
+}
+
+t_node	*ft_get_the_smallest(t_link *link)
+{
+	t_link	*l;
+	t_node	*sml;
+
+	l = link;
+	sml = NULL;
+	if (l)
+	{
+		sml = l->node;
+		while (l)
+		{
+			if (l->node->dist < sml->dist)
+				sml = l->node;
+			l = l->next_l;
+		}
+	}
+	return (sml);
+}
+
+t_node	*ft_get_start_node(t_node *node, t_node *end)
+{
+	t_link	*link;
+	t_node	*best;
+	int 	i;
+
+	link = node->link;
+	best = NULL;
+	i = 0;
+	if (node->link)
+	{
+		best = NULL;
+		while (link)
+		{
+			if (link->node->dist != 0 && link->node->nb_ant == 0 &&
+				(best == NULL || link->node->dist < best->dist) &&
+				node->nb_ant >= link->node->dist)
+				best = link->node;
+			if (ft_strcmp(link->node->name, end->name) == 0) 
+				return (link->node);
+			link = link->next_l;
+		}
+		if (!best)
+		{
+			best = ft_get_the_smallest(link);
+		}
+		if (best && best->nb_ant != 0)
+			best = NULL;
 	}
 	return (best);
 }
@@ -100,7 +140,10 @@ int 	ft_move(t_ant *ant, t_data d, int *space)
 	best_node = NULL;
 	if (ft_strcmp(ant->node->name, d.n_end->name) != 0)
 	{
-		best_node = ft_get_best_node(ant->node, d.n_start, d.n_end);
+		if (ft_strcmp(ant->node->name, d.n_start->name) == 0)
+			best_node = ft_get_start_node(ant->node, d.n_end);
+		else
+			best_node = ft_get_best_node(ant->node, d.n_start, d.n_end);
 		if (best_node)
 		{
 			ant->node->nb_ant -= 1;
