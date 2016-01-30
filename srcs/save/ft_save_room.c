@@ -13,6 +13,7 @@ t_node	*ft_create_node(char *str)
 	ret += ft_strlen_limit(&str[ret], ' ') + 1;
 	node->y = ft_atoi(&str[ret]);
 	node->dist = 0;
+	node->nb_ant = 0;
 	node->link = NULL;
 	return (node);
 }

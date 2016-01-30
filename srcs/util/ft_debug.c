@@ -11,6 +11,9 @@ void	ft_print_node(t_node *n)
 	ft_putchar('[');
 	ft_putnbr(n->dist);
 	ft_putchar(']');
+	ft_putchar('[');
+	ft_putnbr(n->nb_ant);
+	ft_putchar(']');
 	//ft_putchar(' ');
 	//ft_putnbr(n->x);
 	//ft_putchar(' ');
@@ -25,6 +28,9 @@ void	ft_print_node(t_node *n)
 		ft_putchar('[');
 		ft_putnbr(child->dist);
 		ft_putchar(']');
+		ft_putchar('[');
+		ft_putnbr(child->nb_ant);
+		ft_putchar(']');
 		//ft_putchar(' ');
 		//ft_putnbr(child->x);
 		//ft_putchar(' ');
@@ -33,6 +39,7 @@ void	ft_print_node(t_node *n)
 			ft_putstr(", ");
 		link = link->next_l;
 	}
+	ft_putchar('\n');
 }
 
 void	ft_print_data(t_data d)
@@ -56,4 +63,15 @@ void	ft_print_data(t_data d)
 		ft_print_node(g);
 		g = g->next;
 	}
+}
+
+void	ft_print_ant(t_ant *ant)
+{
+	if (ant->id > 0)
+		ft_putchar(' ');
+	ft_putchar('L');
+	ft_putnbr(ant->id);
+	ft_putchar('-');
+	ft_putstr(ant->node->name);
+//	ft_putchar('\n');
 }
