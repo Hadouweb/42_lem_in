@@ -65,13 +65,13 @@ void	ft_print_data(t_data d)
 	}
 }
 
-void	ft_print_ant(t_ant *ant)
+void	ft_print_ant(t_ant ant)
 {
-	if (ant->id > 0)
+	if (ant.id > 0)
 		ft_putchar(' ');
 	ft_putchar('L');
-	ft_putnbr(ant->id);
+	ft_putnbr(ant.id);
 	ft_putchar('-');
-	ft_putstr(ant->node->name);
+	ft_putstr(ant.node->name);
 //	ft_putchar('\n');
 }

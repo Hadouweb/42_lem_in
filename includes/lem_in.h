@@ -58,7 +58,7 @@ typedef struct 		s_data
 	char			*end;
 	t_node			*n_start;
 	t_node			*n_end;
-	t_ant			*list_ant;
+	t_ant			*tabant;
 }					t_data;
 
 int					get_next_line(int const fd, char **line);
@@ -89,6 +89,6 @@ void				ft_verif_double(t_lst *lst);
 void				ft_verif_double_name(t_data *d);
 
 void				ft_print_node(t_node *n);
-void				ft_print_ant(t_ant *list_ant);
+void				ft_print_ant(t_ant ant);
 
 #endif

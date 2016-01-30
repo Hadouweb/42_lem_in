@@ -17,6 +17,7 @@ void	ft_get_start_end(t_data *d)
 			d->n_end = n;
 		n = n->next;
 	}
+	d->n_start->nb_ant = d->ant;
 }
 
 void	ft_parse_data(t_lst **l, t_data *d)
@@ -32,7 +33,7 @@ void	ft_parse_data(t_lst **l, t_data *d)
 	m = 0;
 	while (lst)
 	{
-		printf("%s [%d]\n", lst->str, i);
+	//	printf("%s [%d]\n", lst->str, i);
 
 		if (i == 0)
 			ft_is_ant(lst->str, d);
