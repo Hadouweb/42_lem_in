@@ -89,6 +89,6 @@ void				ft_verif_double(t_lst *lst);
 void				ft_verif_double_name(t_data *d);
 
 void				ft_print_node(t_node *n);
-void				ft_print_ant(t_ant ant);
+void				ft_print_ant(t_ant ant, int space);
 
 #endif

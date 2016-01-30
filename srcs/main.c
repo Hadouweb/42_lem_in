@@ -83,22 +83,44 @@ t_node	*ft_get_best_node(t_node *node, t_node *start, t_node *end)
 					best = link->node;
 				link = link->next_l;
 			}
-			if (ft_strcmp(node->name, start->name) == 0 && best->dist > start->nb_ant)
-				best = NULL;
+		//	if (ft_strcmp(node->name, start->name) == 0 && best->dist > start->nb_ant)
+		//		best = NULL;
 		}
 		//ft_print_node(best);
 	}
 	return (best);
 }
 
+int 	ft_move(t_ant *ant, t_data d, int *space)
+{
+	t_node	*best_node;
+	int 	forward;
+
+	forward = 0;
+	best_node = NULL;
+	if (ft_strcmp(ant->node->name, d.n_end->name) != 0)
+	{
+		best_node = ft_get_best_node(ant->node, d.n_start, d.n_end);
+		if (best_node)
+		{
+			ant->node->nb_ant -= 1;
+			best_node->nb_ant += 1;
+			ant->node = best_node;
+			forward = 1;
+			ft_print_ant(*ant, *space);
+			*space = 1;
+		}
+	}
+	return (forward);
+}
+
 void	ft_start(t_data d)
 {
 	t_ant	*ant;
-	t_node	*best_node;
 	int 	i;
 	int 	forward;
+	int 	space;
 
-	best_node = NULL;
 	i = 0;
 	forward = 1;
 	ant = d.tabant;
@@ -106,29 +128,14 @@ void	ft_start(t_data d)
 	{
 		forward = 0;
 		i = 0;
+		space = 0;
 		while (i < d.ant)
 		{
-			if (ft_strcmp(ant[i].node->name, d.n_end->name) != 0)
-			{
-				best_node = ft_get_best_node(ant[i].node, d.n_start, d.n_end);
-				//printf("%d \n", ant->id);
-				//ft_print_node(ant->node);
-				if (best_node)
-				{
-					//ft_print_node(best_node);
-					ant[i].node->nb_ant -= 1;
-					best_node->nb_ant += 1;
-					ant[i].node = best_node;
-					forward = 1;
-					ft_print_ant(ant[i]);
-					//printf("\n_______\n");
-				}
-				i++;
-			}	
-			else
-				i++;
+			forward += ft_move(&ant[i], d, &space);
+			i++;
 		}
-		ft_putstr("\n");
+		if (forward)
+			ft_putstr("\n");
 		i = 0;
 	}
 }
@@ -157,6 +164,8 @@ int		main(int ac, char **av)
 	//ft_print_ant(d.list_ant);
 	//printf("__________START\n");
 	ft_start(d);
+	if (d.n_end->nb_ant != d.ant)
+		ft_error();
 	//ft_print_data(d);
 	return (0);
 }

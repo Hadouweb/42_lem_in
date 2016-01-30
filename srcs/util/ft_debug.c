@@ -65,9 +65,9 @@ void	ft_print_data(t_data d)
 	}
 }
 
-void	ft_print_ant(t_ant ant)
+void	ft_print_ant(t_ant ant, int space)
 {
-	if (ant.id > 0)
+	if (space)
 		ft_putchar(' ');
 	ft_putchar('L');
 	ft_putnbr(ant.id);
