@@ -8,10 +8,13 @@ void	ft_print_node(t_node *n)
 	link = n->link;
 	child = NULL;
 	ft_putstr(n->name);
-	ft_putchar(' ');
-	ft_putnbr(n->x);
-	ft_putchar(' ');
-	ft_putnbr(n->y);
+	ft_putchar('[');
+	ft_putnbr(n->dist);
+	ft_putchar(']');
+	//ft_putchar(' ');
+	//ft_putnbr(n->x);
+	//ft_putchar(' ');
+	//ft_putnbr(n->y);
 
 	if (link)
 		ft_putstr(" -> ");
@@ -19,10 +22,13 @@ void	ft_print_node(t_node *n)
 	{
 		child = link->node;
 		ft_putstr(child->name);
-		ft_putchar(' ');
-		ft_putnbr(child->x);
-		ft_putchar(' ');
-		ft_putnbr(child->y);
+		ft_putchar('[');
+		ft_putnbr(child->dist);
+		ft_putchar(']');
+		//ft_putchar(' ');
+		//ft_putnbr(child->x);
+		//ft_putchar(' ');
+		//ft_putnbr(child->y);
 		if (link->next_l)
 			ft_putstr(", ");
 		link = link->next_l;
@@ -38,11 +44,10 @@ void	ft_print_data(t_data d)
 
 	ft_putstr("[ANT] : ");
 	ft_putnbr(d.ant);
-
 	ft_putstr("\n[START] : ");
-	ft_print_node(d.start);
+	ft_print_node(d.n_start);
 	ft_putstr("\n[END] : ");
-	ft_print_node(d.end);
+	ft_print_node(d.n_end);
 
 	ft_putstr("\n[ROOMS]");
 	while (g)

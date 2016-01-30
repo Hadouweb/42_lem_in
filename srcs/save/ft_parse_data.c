@@ -1,5 +1,24 @@
 #include "lem_in.h"
 
+void	ft_get_start_end(t_data *d)
+{
+	t_node	*n;
+	char	*start;
+	char	*end;
+
+	n = d->graph;
+	start = ft_strdup_limit(d->start, ' ');
+	end = ft_strdup_limit(d->end, ' ');
+	while (n)
+	{
+		if (ft_strcmp(start, n->name) == 0)
+			d->n_start = n;
+		if (ft_strcmp(end, n->name) == 0)
+			d->n_end = n;
+		n = n->next;
+	}
+}
+
 void	ft_parse_data(t_lst **l, t_data *d)
 {
 	int 	i;
@@ -32,6 +51,7 @@ void	ft_parse_data(t_lst **l, t_data *d)
 	}
 	if (!d->start || !d->end)
 		ft_error();
+	ft_get_start_end(d);
 	ft_verif_double_name(d);
-	ft_print_data(*d);
+	//ft_print_data(*d);
 }

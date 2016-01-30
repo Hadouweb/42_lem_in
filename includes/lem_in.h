@@ -46,8 +46,10 @@ typedef struct 		s_data
 {
 	int				ant;
 	t_node			*graph;
-	t_node			*start;
-	t_node			*end;
+	char			*start;
+	char			*end;
+	t_node			*n_start;
+	t_node			*n_end;
 }					t_data;
 
 int					get_next_line(int const fd, char **line);
@@ -76,5 +78,7 @@ int 				ft_is_link(char *str, t_node *graph);
 
 void				ft_verif_double(t_lst *lst);
 void				ft_verif_double_name(t_data *d);
+
+void				ft_print_node(t_node *n);
 
 #endif
