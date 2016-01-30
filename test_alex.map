@@ -1,4 +1,4 @@
-1000
+14
 ##start
 mdr 0 0
 ##end
@@ -17,6 +17,7 @@ chalala 0 0
 noir 0 0
 mdr-xd
 mdr-lel
+#noir
 mdr-tg
 mdr-pd
 mdr-fdp
@@ -24,6 +25,7 @@ fdp-coco
 coco-nugget
 nugget-nigger
 nigger-poulet
+poulet-nigger
 poulet-poule
 poule-chalala
 chalala-noir
@@ -32,3 +34,4 @@ xd-lol
 lel-pd
 tg-pd
 pd-lol
+lol-pd
