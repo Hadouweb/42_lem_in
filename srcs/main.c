@@ -9,7 +9,7 @@ void	ft_prepare_graph(t_data *d, t_node *n)
 	//printf("____%s\n", n->name);
 	while (link)
 	{
-		if ((link->node->dist == 0 || link->node->dist > n->dist + 1) && 
+		if ((link->node->dist == 0 || link->node->dist > n->dist) && 
 			ft_strcmp(link->node->name, d->n_start->name) &&
 			ft_strcmp(link->node->name, d->n_end->name))
 		{
@@ -57,8 +57,8 @@ t_node	*ft_get_best_node(t_node *node, t_node *start, t_node *end)
 		best = NULL;
 		while (link && !best)
 		{
-			if (link->node->nb_ant == 0 && ft_strcmp(link->node->name, start->name) != 0 && link->node->dist != 0 &&
-				(ft_strcmp(node->name, start->name) == 0 || link->node->dist < node->dist))
+			if (link->node->nb_ant == 0 && ft_strcmp(link->node->name, start->name) != 0 && link->node->dist != 0 
+				&& link->node->dist <= node->dist)
 				best = link->node;
 			if (ft_strcmp(link->node->name, end->name) == 0) 
 				return (link->node);
@@ -88,10 +88,9 @@ t_node	*ft_get_the_smallest(t_link *link)
 	sml = NULL;
 	if (l)
 	{
-		sml = l->node;
 		while (l)
 		{
-			if (l->node->dist < sml->dist)
+			if ((sml == NULL || l->node->dist <= sml->dist) && l->node->dist != 0)
 				sml = l->node;
 			l = l->next_l;
 		}
@@ -123,7 +122,7 @@ t_node	*ft_get_start_node(t_node *node, t_node *end)
 		}
 		if (!best)
 		{
-			best = ft_get_the_smallest(link);
+			best = ft_get_the_smallest(node->link);
 		}
 		if (best && best->nb_ant != 0)
 			best = NULL;
@@ -163,10 +162,12 @@ void	ft_start(t_data d)
 	int 	i;
 	int 	forward;
 	int 	space;
+	int 	j;
 
 	i = 0;
 	forward = 1;
 	ant = d.tabant;
+	j = 0;
 	while (forward && d.n_end->nb_ant != d.ant)
 	{
 		forward = 0;
@@ -207,8 +208,9 @@ int		main(int ac, char **av)
 	//ft_print_ant(d.list_ant);
 	//printf("__________START\n");
 	ft_start(d);
-	if (d.n_end->nb_ant != d.ant)
-		ft_error();
+	//ft_print_ant(d.tabant[0], 1);
+	//if (d.n_end->nb_ant ! d.ant)
+	//	ft_error();
 	//ft_print_data(d);
 	return (0);
 }
