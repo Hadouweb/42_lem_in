@@ -13,7 +13,7 @@ static t_node	*ft_get_best_node(t_node *node, t_node *start, t_node *end)
 		while (link && !best)
 		{
 			if (link->node->nb_ant == 0 && ft_strcmp(link->node->name, start->name) != 0 && link->node->dist != 0 
-				&& link->node->dist <= node->dist)
+				&& link->node->dist < node->dist)
 				best = link->node;
 			if (ft_strcmp(link->node->name, end->name) == 0) 
 				return (link->node);

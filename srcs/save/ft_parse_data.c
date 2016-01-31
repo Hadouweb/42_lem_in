@@ -28,9 +28,15 @@ static void	ft_get_start_end(t_data *d)
 	while (n)
 	{
 		if (ft_strcmp(start, n->name) == 0)
+		{
 			d->n_start = n;
+			d->n_start->id = 0;
+		}
 		if (ft_strcmp(end, n->name) == 0)
+		{
 			d->n_end = n;
+			d->n_end->id = -1;
+		}
 		n = n->next;
 	}
 	d->n_start->nb_ant = d->ant;
@@ -42,21 +48,23 @@ void		ft_parse_data(t_lst **l, t_data *d)
 	int 	cmd;
 	t_lst	*lst;
 	int 	m;
+	int 	r;
 
 	i = 0;
 	cmd = 0;
 	lst = *l;
 	m = 0;
+	r = 1;
 	while (lst)
 	{
-	//	printf("%s [%d]\n", lst->str, i);
+		printf("%s [%d]\n", lst->str, i);
 
 		if (i == 0)
 			ft_is_ant(lst->str, d);
 		else if (ft_is_cmd(lst->str) == 2)
 			ft_special_cmd(lst, d);
-		else if (ft_is_node(lst->str) && m == 0)
-			ft_push_node(lst->str, &d->graph);
+		else if (ft_is_node(lst->str) && m == 0 && r++)
+			ft_push_node(lst->str, &d->graph, r);
 		else if (ft_is_link(lst->str, d->graph) && ++m)
 			;
 		else if (ft_is_cmd(lst->str) > 0)

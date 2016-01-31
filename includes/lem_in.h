@@ -35,6 +35,7 @@ typedef struct 		s_link
 typedef	struct  	s_node
 {
 	char			*name;
+	int 			id;
 	int				x;
 	int				y;
 	int 			dist;
@@ -74,7 +75,7 @@ void			ft_list_push_back(t_lst **l, char *str);
 
 void			ft_parse_data(t_lst **l, t_data *d);
 
-void			ft_push_node(char *str, t_node **graph);
+void			ft_push_node(char *str, t_node **graph, int r);
 void			ft_push_link(t_node *parent, t_node *child);
 void 			ft_del_link(t_link **lst, char *link);
 
@@ -83,8 +84,8 @@ void			ft_start(t_data d);
 int 			ft_count_link(t_node *n);
 t_node			*ft_utmost(t_node *n, t_node *origin);
 
-void			ft_make_graph(t_data *d, t_node *n);
-void			ft_the_killer_link(t_data *d, t_node *n);
+void			ft_make_graph(t_node *n);
+int				ft_make_graph_fast(t_node *n);
 
 t_node 			*ft_is_saved_room(char *str, t_node *graph);
 int 			ft_is_name(char *str, int i);

@@ -8,6 +8,8 @@ void	ft_print_node(t_node *n)
 	link = n->link;
 	child = NULL;
 	ft_putstr(n->name);
+	ft_putstr(" id:");
+	ft_putnbr(n->id);
 	ft_putstr(" [dist: ");
 	ft_putnbr(n->dist);
 	ft_putchar(']');

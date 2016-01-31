@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-static t_node	*ft_create_node(char *str)
+static t_node	*ft_create_node(char *str, int r)
 {
 	t_node	*node;
 	int 	ret;
@@ -15,6 +15,7 @@ static t_node	*ft_create_node(char *str)
 	node->dist = 0;
 	node->nb_ant = 0;
 	node->link = NULL;
+	node->id = r;
 	return (node);
 }
 
@@ -28,7 +29,7 @@ static t_link	*ft_create_link(t_node *child)
 	return (link);
 }
 
-void			ft_push_node(char *str, t_node **graph)
+void			ft_push_node(char *str, t_node **graph, int r)
 {
 
 	t_node	*n;
@@ -38,11 +39,11 @@ void			ft_push_node(char *str, t_node **graph)
 	{
 		while (n->next)
 			n = n->next;
-		n->next = ft_create_node(str);
+		n->next = ft_create_node(str, r);
 	}
 	else
 	{
-		*graph = ft_create_node(str);
+		*graph = ft_create_node(str, r);
 	}
 }
 
