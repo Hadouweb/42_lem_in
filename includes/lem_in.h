@@ -61,35 +61,40 @@ typedef struct 		s_data
 	t_ant			*tabant;
 }					t_data;
 
-int					get_next_line(int const fd, char **line);
-t_lst				*ft_create_line(char *str);
-void				ft_list_push_back(t_lst **l, char *str);
+int 			ft_is_number(char *str, int i);
+void			ft_generate_ant(t_data *d);
 
-void				ft_error(void);
-void 				ft_is_ant(char *str, t_data *d);
-int 				ft_is_name(char *str, int i);
-int 				ft_is_number(char *str, int i);
-int 				ft_is_node(char *str);
+void			ft_print_node(t_node *n);
+void			ft_print_data(t_data d);
+void			ft_print_ant(t_ant ant, int space);
 
-void				ft_parse_data(t_lst **l, t_data *d);
-int 				ft_is_cmd(char *str);
-void 				ft_special_cmd(t_lst *l, t_data *d);
-t_node				*ft_create_node(char *str);
+int				get_next_line(int const fd, char **line);
 
-void				ft_print_data(t_data d);
+void			ft_list_push_back(t_lst **l, char *str);
 
-t_node				*ft_create_node(char *str);
-void				ft_push_node(char *str, t_node **graph);
-t_link				*ft_create_link(t_node *child);
-void				ft_push_link(t_node *parent, t_node *child);
+void			ft_parse_data(t_lst **l, t_data *d);
 
-int 				ft_is_link(char *str, t_node *graph);
+void			ft_push_node(char *str, t_node **graph);
+void			ft_push_link(t_node *parent, t_node *child);
+void 			ft_del_link(t_link **lst, char *link);
 
-void				ft_verif_double(t_lst *lst);
-void				ft_verif_double_name(t_data *d);
+void			ft_start(t_data d);
 
-void				ft_print_node(t_node *n);
-void				ft_print_ant(t_ant ant, int space);
-void				ft_del_link(t_link **lst, char *link);
+int 			ft_count_link(t_node *n);
+t_node			*ft_utmost(t_node *n, t_node *origin);
+
+void			ft_make_graph(t_data *d, t_node *n);
+void			ft_the_killer_link(t_data *d, t_node *n);
+
+t_node 			*ft_is_saved_room(char *str, t_node *graph);
+int 			ft_is_name(char *str, int i);
+int 			ft_is_node(char *str);
+int 			ft_is_link(char *str, t_node *graph);
+
+void			ft_error();
+void 			ft_is_ant(char *str, t_data *d);
+int 			ft_is_cmd(char *str);
+void			ft_verif_double(t_lst *lst);
+void			ft_verif_double_name(t_data *d);
 
 #endif

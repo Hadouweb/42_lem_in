@@ -4,6 +4,7 @@ SRCPATH = ./srcs
 ERRORPATH = $(SRCPATH)/error
 SAVEPATH = $(SRCPATH)/save
 UTILPATH = $(SRCPATH)/util
+GRAPHPATH = $(SRCPATH)/graph
 INCPATH = ./includes
 
 LIBFT = ./libft
@@ -14,14 +15,16 @@ LIB = $(LIBFT)/libft.a
 
 SRC = 	$(SRCPATH)/main.c\
 		$(SAVEPATH)/get_next_line.c\
-		$(SAVEPATH)/ft_save_data.c\
 		$(SAVEPATH)/ft_parse_data.c\
-		$(SAVEPATH)/ft_save_room.c\
+		$(SAVEPATH)/ft_list_room.c\
 		$(SAVEPATH)/ft_read_data.c\
 		$(ERRORPATH)/ft_error.c\
 		$(ERRORPATH)/ft_error_room.c\
 		$(UTILPATH)/ft_util.c\
 		$(UTILPATH)/ft_debug.c\
+		$(GRAPHPATH)/ft_make_graph.c\
+		$(GRAPHPATH)/ft_make_util.c\
+		$(GRAPHPATH)/ft_move.c\
 
 OBJ = $(SRC:.c=.o)
 

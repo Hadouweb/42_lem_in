@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-t_lst	*ft_create_line(char *str)
+static t_lst	*ft_create_line(char *str)
 {
 	t_lst	*list;
 
@@ -9,7 +9,7 @@ t_lst	*ft_create_line(char *str)
 	return (list);
 }
 
-void	ft_list_push_back(t_lst **l, char *str)
+void			ft_list_push_back(t_lst **l, char *str)
 {
 	t_lst	*list;
 

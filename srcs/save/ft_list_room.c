@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-t_node	*ft_create_node(char *str)
+static t_node	*ft_create_node(char *str)
 {
 	t_node	*node;
 	int 	ret;
@@ -18,7 +18,17 @@ t_node	*ft_create_node(char *str)
 	return (node);
 }
 
-void	ft_push_node(char *str, t_node **graph)
+
+static t_link	*ft_create_link(t_node *child)
+{
+	t_link	*link;
+
+	link = (t_link*)ft_memalloc(sizeof(t_link));
+	link->node = child;
+	return (link);
+}
+
+void			ft_push_node(char *str, t_node **graph)
 {
 
 	t_node	*n;
@@ -36,7 +46,22 @@ void	ft_push_node(char *str, t_node **graph)
 	}
 }
 
-void ft_del_link(t_link **lst, char *link)
+void			ft_push_link(t_node *parent, t_node *child)
+{
+	t_link	*link;
+
+	link = parent->link;
+	if (link)
+	{
+		while (link->next_l)
+			link = link->next_l;
+		link->next_l = ft_create_link(child);
+	}
+	else
+		parent->link = ft_create_link(child);
+}
+
+void 			ft_del_link(t_link **lst, char *link)
 {
 	t_link	*l;
 	t_link	*tmp;
@@ -68,28 +93,4 @@ void ft_del_link(t_link **lst, char *link)
 	}
 	free(tmp);
 	tmp = NULL;
-}
-
-t_link	*ft_create_link(t_node *child)
-{
-	t_link	*link;
-
-	link = (t_link*)ft_memalloc(sizeof(t_link));
-	link->node = child;
-	return (link);
-}
-
-void	ft_push_link(t_node *parent, t_node *child)
-{
-	t_link	*link;
-
-	link = parent->link;
-	if (link)
-	{
-		while (link->next_l)
-			link = link->next_l;
-		link->next_l = ft_create_link(child);
-	}
-	else
-		parent->link = ft_create_link(child);
 }

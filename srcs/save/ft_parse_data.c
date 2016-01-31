@@ -1,6 +1,22 @@
 #include "lem_in.h"
 
-void	ft_get_start_end(t_data *d)
+static void ft_special_cmd(t_lst *l, t_data *d)
+{
+	if (ft_strcmp(l->str, "##start") == 0)
+	{
+		if (!ft_is_node(l->next->str))
+			ft_error();
+		d->start = l->next->str;
+	}
+	else if (ft_strcmp(l->str, "##end") == 0)
+	{
+		if (!ft_is_node(l->next->str))
+			ft_error();
+		d->end = l->next->str;
+	}
+}
+
+static void	ft_get_start_end(t_data *d)
 {
 	t_node	*n;
 	char	*start;
@@ -20,7 +36,7 @@ void	ft_get_start_end(t_data *d)
 	d->n_start->nb_ant = d->ant;
 }
 
-void	ft_parse_data(t_lst **l, t_data *d)
+void		ft_parse_data(t_lst **l, t_data *d)
 {
 	int 	i;
 	int 	cmd;
@@ -54,5 +70,4 @@ void	ft_parse_data(t_lst **l, t_data *d)
 		ft_error();
 	ft_get_start_end(d);
 	ft_verif_double_name(d);
-	//ft_print_data(*d);
 }

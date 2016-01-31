@@ -26,3 +26,17 @@ int 	ft_is_number(char *str, int i)
 		ret++;
 	return (ret);
 }
+
+void	ft_generate_ant(t_data *d)
+{
+	int 	i;
+
+	i = 0;
+	d->tabant = (t_ant*)ft_memalloc(sizeof(t_ant) * d->ant);
+	while (i < d->ant)
+	{
+		d->tabant[i].id = i;
+		d->tabant[i].node = d->n_start;
+		i++;
+	}
+}
