@@ -36,6 +36,40 @@ void	ft_push_node(char *str, t_node **graph)
 	}
 }
 
+void ft_del_link(t_link **lst, char *link)
+{
+	t_link	*l;
+	t_link	*tmp;
+	int 	find;
+
+	l = *lst;
+	tmp = NULL;
+	find = 1;
+	if (ft_strcmp(l->node->name, link) == 0)
+	{
+		tmp = l;
+		if (tmp->next_l)
+			*lst = tmp->next_l;
+	}
+	else
+	{
+		while (l && find)
+		{
+			if (ft_strcmp(l->next_l->node->name, link) == 0)
+			{
+				tmp = l->next_l;
+				if (tmp && tmp->next_l)
+					l->next_l = tmp->next_l;
+				else
+					l->next_l = NULL;
+			}
+			l = l->next_l;
+		}
+	}
+	free(tmp);
+	tmp = NULL;
+}
+
 t_link	*ft_create_link(t_node *child)
 {
 	t_link	*link;

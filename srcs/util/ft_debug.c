@@ -8,10 +8,10 @@ void	ft_print_node(t_node *n)
 	link = n->link;
 	child = NULL;
 	ft_putstr(n->name);
-	ft_putchar('[');
+	ft_putstr(" [dist: ");
 	ft_putnbr(n->dist);
 	ft_putchar(']');
-	ft_putchar('[');
+	ft_putstr("[nb_ant: ");
 	ft_putnbr(n->nb_ant);
 	ft_putchar(']');
 	//ft_putchar(' ');
@@ -25,10 +25,10 @@ void	ft_print_node(t_node *n)
 	{
 		child = link->node;
 		ft_putstr(child->name);
-		ft_putchar('[');
+		ft_putstr(" [dist: ");
 		ft_putnbr(child->dist);
 		ft_putchar(']');
-		ft_putchar('[');
+		ft_putstr("[nb_ant: ");
 		ft_putnbr(child->nb_ant);
 		ft_putchar(']');
 		//ft_putchar(' ');
