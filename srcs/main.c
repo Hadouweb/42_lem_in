@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nle-bret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/02/01 07:29:18 by nle-bret          #+#    #+#             */
+/*   Updated: 2016/02/01 07:29:21 by nle-bret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
-#include <fcntl.h>	
 
 static void	ft_init_data(t_data *d)
 {
@@ -14,132 +25,73 @@ static void	ft_init_data(t_data *d)
 	d->tmp_ant = NULL;
 }
 
-void 		ft_print_options(void)
+static void	ft_load(t_data *d, t_lst **lst)
 {
-	ft_putstr("usage: lem-in [-herosg]\n\n");
-	ft_putstr("\th : print this message help\n");
-	ft_putstr("\te : print error message\n");
-	ft_putstr("\tr : print all rooms used\n");
-	ft_putstr("\to : print the solution quickly\n");
-	ft_putstr("\ts : print the number of steps\n");
-	ft_putstr("\tg : print the solution with random map (1-500 rooms, 1-1000 ants)\n");
-	ft_putstr("\ta : force the number of ant : -a number\n");
-	ft_putchar('\n');
-	exit(1);
-}
-
-void		ft_parse_options(char *options, t_data *d)
-{
-	int 	i;
+	char	*line;
+	int		i;
 
 	i = 0;
-	if (options[0] != '-')
-	{
-		ft_putstr("lem-in: illegal option\n");
+	if (d->opt.h)
 		ft_print_options();
-	}
+	if (d->opt.g)
+		ft_use_map(lst);
 	else
 	{
-		i++;
-		while (options[i])
+		while (get_next_line(0, &line) > 0)
 		{
-			if (options[i] == 'h')
-				d->opt.h = 1;
-			else if (options[i] == 'e')
-				d->opt.e = 1;
-			else if (options[i] == 'r')
-				d->opt.r = 1;
-			else if (options[i] == 'o')
-				d->opt.o = 1;
-			else if (options[i] == 's')
-				d->opt.s = 1;
-			else if (options[i] == 'g')
-				d->opt.g = 1;
-			else if (options[i] == 'a')
-				d->opt.a = 1;
-			else
-			{
-				ft_putstr("lem-in: illegal option\n");
-				ft_print_options();
-			}
+			ft_list_push_back(lst, line);
+			ft_strdel(&line);
 			i++;
 		}
 	}
+	if (!d->opt.o)
+		ft_verif_double(*lst, *d);
+	ft_parse_data(lst, d);
+	if (d->opt.o)
+		ft_make_graph_fast(d->n_end);
+	else
+		ft_make_graph(d->n_end);
 }
 
-void		ft_print_road(t_data *d)
+static void	ft_load_options(t_data d)
 {
-	t_node	*n;
-
-	n = d->graph;
-	while (n)
+	if (d.opt.r)
+		ft_print_road(&d);
+	if (d.opt.s)
 	{
-		if (n->used)
-			ft_print_node(n);
-		n = n->next;
+		ft_putstr("\033[0;102m \033[1;30mSTEPS : ");
+		ft_putnbr(d.step);
+		ft_putstr(" \033[0m\n");
 	}
-}
-
-void		ft_options(t_data *d)
-{
-	if (d->opt.h )
-		ft_print_options();
+	if (d.n_end->nb_ant != d.ant)
+		ft_error("No valid path", d);
 }
 
 int			main(int ac, char **av)
 {
-	char	*line;
 	t_lst	*lst;
-	int		fd;
 	t_data	d;
-	int 	i;
+	int		i;
 
 	lst = NULL;
-	i = 1;
-	fd = open(av[1], O_RDONLY);
 	ft_init_data(&d);
+	i = 1;
 	if (ac > 1)
 	{
 		while (i < ac)
 		{
 			if (d.opt.a)
 			{
-				d.tmp_ant = ft_strdup(av[i]);
+				d.tmp_ant = ft_strdup(av[i++]);
 				d.opt.a = 0;
 			}
 			else
-				ft_parse_options(av[i], &d);
-			i++;
-		}
-		ft_options(&d);
-	}
-	i = 0;
-	if (d.opt.g)
-		ft_use_map(&lst);
-	else
-	{
-		while (get_next_line(0, &line) > 0)
-		{
-			ft_list_push_back(&lst, line);
-			ft_strdel(&line);
-			i++;
+				ft_parse_options(av[i++], &d);
 		}
 	}
-	if (!d.opt.o)
-		ft_verif_double(lst, d);
-	ft_parse_data(&lst, &d);
-	if (d.opt.o)
-		ft_make_graph_fast(d.n_end);
-	else
-		ft_make_graph(d.n_end);
+	ft_load(&d, &lst);
 	ft_generate_ant(&d);
 	ft_start(&d);
-	if (d.opt.r)
-		ft_print_road(&d);
-	if (d.opt.s)
-		printf("\n\e[0;102m \e[1;30mSTEPS : %d \e[0m\n", d.step);
-	if (d.n_end->nb_ant != d.ant)
-		ft_error("No valid path", d);
-	sleep(5);
+	ft_load_options(d);
 	return (0);
 }

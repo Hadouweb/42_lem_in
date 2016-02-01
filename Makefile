@@ -23,6 +23,7 @@ SRC = 	$(SRCPATH)/main.c\
 		$(UTILPATH)/ft_util.c\
 		$(UTILPATH)/ft_debug.c\
 		$(UTILPATH)/ft_gen.c\
+		$(UTILPATH)/ft_options.c\
 		$(GRAPHPATH)/ft_make_graph.c\
 		$(GRAPHPATH)/ft_make_util.c\
 		$(GRAPHPATH)/ft_move.c\

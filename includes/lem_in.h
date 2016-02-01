@@ -6,6 +6,10 @@
 
 # define BUFF_SIZE 4096
 
+# define CYAN "\e[0;102m"
+# define BBLACK "\e[1;30m"
+# define RESET "\e[0m"
+
 typedef struct		s_save
 {
 	int				fd_num;
@@ -116,5 +120,10 @@ void			ft_verif_double_name(t_data *d);
 t_node			*ft_get_start_node(t_node *node, t_node *end);
 int 			ft_move(t_ant *ant, t_data d, int *space);
 int 			ft_use_map(t_lst **lst);
+
+void 			ft_print_options(void);
+void			ft_parse_options(char *options, t_data *d);
+void			ft_print_road(t_data *d);
+void			ft_options(t_data *d);
 
 #endif
