@@ -11,20 +11,28 @@
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include <stdio.h>
 
 static void	ft_special_cmd(t_lst *l, t_data *d)
 {
-	if (ft_strcmp(l->str, "##start") == 0)
+	t_lst	*lst;
+
+	lst = l;
+	if (ft_strcmp(lst->str, "##start") == 0)
 	{
-		if (!ft_is_node(l->next->str))
+		while (lst && ft_is_cmd(lst->str) > 0)
+			lst = lst->next;
+		if (!ft_is_node(lst->str))
 			ft_error("Room start is invalid", *d);
-		d->start = l->next->str;
+		d->start = lst->str;
 	}
-	else if (ft_strcmp(l->str, "##end") == 0)
+	else if (ft_strcmp(lst->str, "##end") == 0)
 	{
-		if (!ft_is_node(l->next->str))
+		while (lst && ft_is_cmd(lst->str) > 0)
+			lst = lst->next;
+		if (!ft_is_node(lst->str))
 			ft_error("Room end is invalid", *d);
-		d->end = l->next->str;
+		d->end = lst->str;
 	}
 }
 
@@ -69,15 +77,15 @@ void		ft_parse_data(t_lst **l, t_data *d)
 	r = 1;
 	while (lst)
 	{
-		if (i++ == 0)
+		if (ft_is_cmd(lst->str) > 0 && ft_is_cmd(lst->str) != 2)
+			;
+		else if (ft_is_cmd(lst->str) == 0 && ++i == 1)
 			ft_is_ant(lst->str, d);
 		else if (ft_is_cmd(lst->str) == 2)
 			ft_special_cmd(lst, d);
 		else if (ft_is_node(lst->str) && m == 0 && r++)
 			ft_push_node(lst->str, &d->graph, r);
 		else if (ft_is_link(lst->str, d->graph) && ++m)
-			;
-		else if (ft_is_cmd(lst->str) > 0)
 			;
 		else
 			ft_error(lst->str, *d);

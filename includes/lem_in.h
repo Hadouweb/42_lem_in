@@ -145,5 +145,6 @@ void				ft_options(t_data *d);
 void				ft_get_start_end(t_data *d);
 t_node				*ft_get_the_smallest_verify(t_link *link, t_node *sml);
 t_node				*ft_get_the_smallest(t_link *link);
+void				ft_print_map(t_lst *lst);
 
 #endif

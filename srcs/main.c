@@ -68,6 +68,7 @@ static void	ft_load(t_data *d, t_lst **lst)
 		ft_verif_double(*lst, *d);
 	ft_parse_data(lst, d);
 	ft_check_after_parse(d);
+	ft_print_map(*lst);
 }
 
 static void	ft_load_options(t_data d)

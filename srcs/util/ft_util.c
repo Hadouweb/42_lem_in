@@ -52,3 +52,16 @@ void	ft_generate_ant(t_data *d)
 		i++;
 	}
 }
+
+void	ft_print_map(t_lst *lst)
+{
+	t_lst	*l;
+
+	l = lst;
+	while (l)
+	{
+		ft_putstr(l->str);
+		write(1, "\n", 1);
+		l = l->next;
+	}
+}
