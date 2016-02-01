@@ -65,6 +65,7 @@ typedef struct 		s_option
 	char 			s;
 	char 			g;
 	char 			a;
+	char 			l;
 }					t_option;
 
 typedef struct 		s_data
@@ -84,7 +85,7 @@ typedef struct 		s_data
 int 			ft_is_number(char *str, int i);
 void			ft_generate_ant(t_data *d);
 
-void			ft_print_node(t_node *n);
+void			ft_print_node(t_node *n, t_data d);
 void			ft_print_data(t_data d);
 void			ft_print_ant(t_ant ant, int space);
 
@@ -125,5 +126,6 @@ void 			ft_print_options(void);
 void			ft_parse_options(char *options, t_data *d);
 void			ft_print_road(t_data *d);
 void			ft_options(t_data *d);
+void			ft_get_start_end(t_data *d);
 
 #endif

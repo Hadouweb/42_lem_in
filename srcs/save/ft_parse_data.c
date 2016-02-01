@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-static void ft_special_cmd(t_lst *l, t_data *d)
+static void	ft_special_cmd(t_lst *l, t_data *d)
 {
 	if (ft_strcmp(l->str, "##start") == 0)
 	{
@@ -28,7 +28,7 @@ static void ft_special_cmd(t_lst *l, t_data *d)
 	}
 }
 
-static void	ft_get_start_end(t_data *d)
+void		ft_get_start_end(t_data *d)
 {
 	t_node	*n;
 	char	*start;
@@ -58,22 +58,18 @@ static void	ft_get_start_end(t_data *d)
 
 void		ft_parse_data(t_lst **l, t_data *d)
 {
-	int 	i;
-	int 	cmd;
+	int		i;
 	t_lst	*lst;
-	int 	m;
-	int 	r;
+	int		m;
+	int		r;
 
 	i = 0;
-	cmd = 0;
 	lst = *l;
 	m = 0;
 	r = 1;
 	while (lst)
 	{
-		printf("%s [%d]\n", lst->str, i);
-
-		if (i == 0)
+		if (i++ == 0)
 			ft_is_ant(lst->str, d);
 		else if (ft_is_cmd(lst->str) == 2)
 			ft_special_cmd(lst, d);
@@ -86,10 +82,5 @@ void		ft_parse_data(t_lst **l, t_data *d)
 		else
 			ft_error(lst->str, *d);
 		lst = lst->next;
-		i++;
 	}
-	if (!d->start || !d->end)
-		ft_error("Start or end is missing", *d);
-	ft_get_start_end(d);
-	ft_verif_double_name(d);
 }

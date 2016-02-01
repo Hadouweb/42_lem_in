@@ -23,6 +23,26 @@ static void	ft_init_data(t_data *d)
 	d->tabant = NULL;
 	d->step = 0;
 	d->tmp_ant = NULL;
+	d->opt.h = 0;
+	d->opt.e = 0;
+	d->opt.r = 0;
+	d->opt.o = 0;
+	d->opt.s = 0;
+	d->opt.g = 0;
+	d->opt.a = 0;
+	d->opt.l = 0;
+}
+
+static void	ft_check_after_parse(t_data *d)
+{
+	if (!d->start || !d->end)
+		ft_error("Start or end is missing", *d);
+	ft_verif_double_name(d);
+	ft_get_start_end(d);
+	if (d->opt.o)
+		ft_make_graph_fast(d->n_end);
+	else
+		ft_make_graph(d->n_end);
 }
 
 static void	ft_load(t_data *d, t_lst **lst)
@@ -47,10 +67,7 @@ static void	ft_load(t_data *d, t_lst **lst)
 	if (!d->opt.o)
 		ft_verif_double(*lst, *d);
 	ft_parse_data(lst, d);
-	if (d->opt.o)
-		ft_make_graph_fast(d->n_end);
-	else
-		ft_make_graph(d->n_end);
+	ft_check_after_parse(d);
 }
 
 static void	ft_load_options(t_data d)

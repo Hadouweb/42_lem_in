@@ -12,10 +12,10 @@
 
 #include "lem_in.h"
 
-int 	ft_is_number(char *str, int i)
+int		ft_is_number(char *str, int i)
 {
-	int 	s;
-	int 	ret;
+	int		s;
+	int		ret;
 
 	s = 0;
 	ret = 0;
@@ -41,7 +41,7 @@ int 	ft_is_number(char *str, int i)
 
 void	ft_generate_ant(t_data *d)
 {
-	int 	i;
+	int		i;
 
 	i = 0;
 	d->tabant = (t_ant*)ft_memalloc(sizeof(t_ant) * d->ant);

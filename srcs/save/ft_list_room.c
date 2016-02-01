@@ -15,7 +15,7 @@
 static t_node	*ft_create_node(char *str, int r)
 {
 	t_node	*node;
-	int 	ret;
+	int		ret;
 
 	ret = 0;
 	node = (t_node*)ft_memalloc(sizeof(t_node));
@@ -32,7 +32,6 @@ static t_node	*ft_create_node(char *str, int r)
 	return (node);
 }
 
-
 static t_link	*ft_create_link(t_node *child)
 {
 	t_link	*link;
@@ -44,7 +43,6 @@ static t_link	*ft_create_link(t_node *child)
 
 void			ft_push_node(char *str, t_node **graph, int r)
 {
-
 	t_node	*n;
 
 	n = *graph;
@@ -55,9 +53,7 @@ void			ft_push_node(char *str, t_node **graph, int r)
 		n->next = ft_create_node(str, r);
 	}
 	else
-	{
 		*graph = ft_create_node(str, r);
-	}
 }
 
 void			ft_push_link(t_node *parent, t_node *child)
@@ -73,38 +69,4 @@ void			ft_push_link(t_node *parent, t_node *child)
 	}
 	else
 		parent->link = ft_create_link(child);
-}
-
-void 			ft_del_link(t_link **lst, char *link)
-{
-	t_link	*l;
-	t_link	*tmp;
-	int 	find;
-
-	l = *lst;
-	tmp = NULL;
-	find = 1;
-	if (ft_strcmp(l->node->name, link) == 0)
-	{
-		tmp = l;
-		if (tmp->next_l)
-			*lst = tmp->next_l;
-	}
-	else
-	{
-		while (l && find)
-		{
-			if (ft_strcmp(l->next_l->node->name, link) == 0)
-			{
-				tmp = l->next_l;
-				if (tmp && tmp->next_l)
-					l->next_l = tmp->next_l;
-				else
-					l->next_l = NULL;
-			}
-			l = l->next_l;
-		}
-	}
-	free(tmp);
-	tmp = NULL;
 }

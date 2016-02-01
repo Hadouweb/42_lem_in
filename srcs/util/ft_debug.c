@@ -32,7 +32,7 @@ void 	ft_print_link(t_link *link)
 	ft_putstr(" \e[0m");
 }
 
-void	ft_print_node(t_node *n)
+void	ft_print_node(t_node *n, t_data d)
 {
 	ft_putstr("\e[44m NAME: ");
 	ft_putstr(n->name);
@@ -41,7 +41,8 @@ void	ft_print_node(t_node *n)
 	ft_putstr("] | DIST: ");
 	ft_putnbr(n->dist);
 	ft_putstr(" \e[0m");
-	ft_print_link(n->link);
+	if (d.opt.l)
+		ft_print_link(n->link);
 	ft_putchar('\n');
 }
 
@@ -55,15 +56,15 @@ void	ft_print_data(t_data d)
 	ft_putstr("[ANT] : ");
 	ft_putnbr(d.ant);
 	ft_putstr("\n[START] : ");
-	ft_print_node(d.n_start);
+	ft_print_node(d.n_start, d);
 	ft_putstr("\n[END] : ");
-	ft_print_node(d.n_end);
+	ft_print_node(d.n_end, d);
 
 	ft_putstr("\n[ROOMS]");
 	while (g)
 	{
 		ft_putchar('\n');
-		ft_print_node(g);
+		ft_print_node(g, d);
 		g = g->next;
 	}
 }
@@ -76,5 +77,4 @@ void	ft_print_ant(t_ant ant, int space)
 	ft_putnbr(ant.id + 1);
 	ft_putchar('-');
 	ft_putstr(ant.node->name);
-//	ft_putchar('\n');
 }

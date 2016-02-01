@@ -53,7 +53,7 @@ void	ft_fprint_link(int size, int density, int fd)
 		j = 0;
 		while (j < size)
 		{
-			if (density > rand() % 20 + 1)
+			if (density > rand() % 100)
 			{
 				ft_putnbr_fd(i, fd);
 				write(fd, "-", 1);
@@ -75,10 +75,9 @@ void	ft_generate(int fd)
 	int		end;
 
 	srand(time(NULL));
-
-	size = rand() % 1000 + 2;
-	density = rand() % 10 + 1;
-	nb_ant = rand() % 1000;
+	size = rand() % 2000;
+	density = rand() % 5;
+	nb_ant = rand() % 10000 + 100;
 	start = rand() % size;
 	end = rand() % size;
 	ft_putnbr_fd(nb_ant, fd);
@@ -87,10 +86,10 @@ void	ft_generate(int fd)
 	ft_fprint_link(size, density, fd);
 }
 
-int 	ft_use_map(t_lst **lst)
+int		ft_use_map(t_lst **lst)
 {
-	int 	fd;
-	char 	*line;
+	int		fd;
+	char	*line;
 
 	fd = 0;
 	fd = open("test", O_TRUNC | O_CREAT | O_APPEND | O_RDWR, 0660);
@@ -105,4 +104,3 @@ int 	ft_use_map(t_lst **lst)
 	close(fd);
 	return (0);
 }
-
