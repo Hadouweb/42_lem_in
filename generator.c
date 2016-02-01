@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <time.h>
 
 void	ft_print_node(int size, int start, int end)
 {
@@ -51,7 +52,7 @@ void	ft_print_link(int size, int density)
 		j = 0;
 		while (j < size)
 		{
-			if (density > rand() % 50)
+			if (density > rand() % 80)
 			{
 				ft_putnbr(i);
 				write(1, "-", 1);
@@ -71,6 +72,8 @@ int		main(int ac, char **av)
 	int		nb_ant;
 	int		start;
 	int		end;
+
+	srand(time(NULL));
 
 	if (ac != 4)
 	{

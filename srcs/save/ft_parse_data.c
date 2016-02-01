@@ -39,6 +39,8 @@ static void	ft_get_start_end(t_data *d)
 		}
 		n = n->next;
 	}
+	ft_strdel(&start);
+	ft_strdel(&end);
 	d->n_start->nb_ant = d->ant;
 }
 
@@ -70,7 +72,7 @@ void		ft_parse_data(t_lst **l, t_data *d)
 		else if (ft_is_cmd(lst->str) > 0)
 			;
 		else
-			ft_error("Unspecified error", *d);
+			ft_error(lst->str, *d);
 		lst = lst->next;
 		i++;
 	}

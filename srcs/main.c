@@ -11,6 +11,7 @@ static void	ft_init_data(t_data *d)
 	d->n_end = NULL;
 	d->tabant = NULL;
 	d->step = 0;
+	d->tmp_ant = NULL;
 }
 
 void 		ft_print_options(void)
@@ -83,8 +84,6 @@ void		ft_options(t_data *d)
 {
 	if (d->opt.h )
 		ft_print_options();
-	if (d->opt.g)
-		printf("Pouet\n");
 }
 
 int			main(int ac, char **av)
@@ -115,11 +114,16 @@ int			main(int ac, char **av)
 		ft_options(&d);
 	}
 	i = 0;
-	while (get_next_line(0, &line) > 0)
+	if (d.opt.g)
+		ft_use_map(&lst);
+	else
 	{
-		ft_list_push_back(&lst, line);
-		ft_strdel(&line);
-		i++;
+		while (get_next_line(0, &line) > 0)
+		{
+			ft_list_push_back(&lst, line);
+			ft_strdel(&line);
+			i++;
+		}
 	}
 	if (!d.opt.o)
 		ft_verif_double(lst, d);
@@ -136,5 +140,6 @@ int			main(int ac, char **av)
 		printf("\n\e[0;102m \e[1;30mSTEPS : %d \e[0m\n", d.step);
 	if (d.n_end->nb_ant != d.ant)
 		ft_error("No valid path", d);
+	sleep(5);
 	return (0);
 }

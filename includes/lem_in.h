@@ -115,5 +115,6 @@ void			ft_verif_double_name(t_data *d);
 
 t_node			*ft_get_start_node(t_node *node, t_node *end);
 int 			ft_move(t_ant *ant, t_data d, int *space);
+int 			ft_use_map(t_lst **lst);
 
 #endif

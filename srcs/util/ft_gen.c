@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   generator.c                                        :+:      :+:    :+:   */
+/*   ft_generator.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nle-bret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lem_in.h"
 #include <fcntl.h>
+#include <time.h>
 
-void	ft_print_node(int size, int start, int end, int fd)
+void	ft_fprint_node(int size, int start, int end, int fd)
 {
 	int		i;
 
@@ -41,7 +42,7 @@ void	ft_print_node(int size, int start, int end, int fd)
 	}
 }
 
-void	ft_print_link(int size, int density, int fd)
+void	ft_fprint_link(int size, int density, int fd)
 {
 	int		i;
 	int		j;
@@ -52,7 +53,7 @@ void	ft_print_link(int size, int density, int fd)
 		j = 0;
 		while (j < size)
 		{
-			if (density > rand() % 50)
+			if (density > rand() % 20 + 1)
 			{
 				ft_putnbr_fd(i, fd);
 				write(fd, "-", 1);
@@ -73,25 +74,35 @@ void	ft_generate(int fd)
 	int		start;
 	int		end;
 
+	srand(time(NULL));
 
-	size = 10;
-	density = 10;
-	nb_ant = 10;
+	size = rand() % 1000 + 2;
+	density = rand() % 10 + 1;
+	nb_ant = rand() % 1000;
 	start = rand() % size;
 	end = rand() % size;
 	ft_putnbr_fd(nb_ant, fd);
 	write(fd, "\n", 1);
-	ft_print_node(size, start, end, fd);
-	ft_print_link(size, density, fd);
+	ft_fprint_node(size, start, end, fd);
+	ft_fprint_link(size, density, fd);
 }
 
-int 	main(void)
+int 	ft_use_map(t_lst **lst)
 {
 	int 	fd;
+	char 	*line;
 
 	fd = 0;
-	fd = open("test", O_TRUNC | O_CREAT | O_APPEND | O_WRONLY, 0660);
+	fd = open("test", O_TRUNC | O_CREAT | O_APPEND | O_RDWR, 0660);
 	ft_generate(fd);
+	close(fd);
+	fd = open("test", O_RDONLY);
+	while (get_next_line(fd, &line) > 0)
+	{
+		ft_list_push_back(lst, line);
+		ft_strdel(&line);
+	}
 	close(fd);
 	return (0);
 }
+

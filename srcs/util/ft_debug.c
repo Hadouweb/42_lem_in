@@ -61,7 +61,7 @@ void	ft_print_ant(t_ant ant, int space)
 	if (space)
 		ft_putchar(' ');
 	ft_putchar('L');
-	ft_putnbr(ant.id);
+	ft_putnbr(ant.id + 1);
 	ft_putchar('-');
 	ft_putstr(ant.node->name);
 //	ft_putchar('\n');
