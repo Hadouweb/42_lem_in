@@ -40,6 +40,7 @@ typedef	struct  	s_node
 	int				y;
 	int 			dist;
 	int 			nb_ant;
+	int 			used;
 	struct s_node	*next;
 	struct s_link	*link;
 }					t_node;
@@ -108,5 +109,8 @@ void 			ft_is_ant(char *str, t_data *d);
 int 			ft_is_cmd(char *str);
 void			ft_verif_double(t_lst *lst, t_data d);
 void			ft_verif_double_name(t_data *d);
+
+t_node			*ft_get_start_node(t_node *node, t_node *end);
+int 			ft_move(t_ant *ant, t_data d, int *space);
 
 #endif

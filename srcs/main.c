@@ -17,7 +17,7 @@ void 		ft_print_options(void)
 	ft_putstr("usage: lem-in [-herosg]\n\n");
 	ft_putstr("\th : print this message help\n");
 	ft_putstr("\te : print error message\n");
-	ft_putstr("\tr : print all roads used\n");
+	ft_putstr("\tr : print all rooms used\n");
 	ft_putstr("\to : print the solution quickly\n");
 	ft_putstr("\ts : print the number of steps\n");
 	ft_putstr("\tg : print the solution with random map (1-500 rooms, 1-1000 ants)\n");
@@ -62,14 +62,23 @@ void		ft_parse_options(char *options, t_data *d)
 	}
 }
 
+void		ft_print_road(t_data *d)
+{
+	t_node	*n;
+
+	n = d->graph;
+	while (n)
+	{
+		if (n->used)
+			ft_print_node(n);
+		n = n->next;
+	}
+}
+
 void		ft_options(t_data *d)
 {
 	if (d->opt.h )
 		ft_print_options();
-	if (d->opt.r)
-		printf("Pouet\n");
-	if (d->opt.o)
-		printf("Pouet\n");
 	if (d->opt.s)
 		printf("Pouet\n");
 	if (d->opt.g)
@@ -104,23 +113,17 @@ int			main(int ac, char **av)
 		ft_strdel(&line);
 		i++;
 	}
-	ft_verif_double(lst, d);
+	if (!d.opt.o)
+		ft_verif_double(lst, d);
 	ft_parse_data(&lst, &d);
-
-	//ft_print_data(d);
-	if (i > 50000)
+	if (d.opt.o)
 		ft_make_graph_fast(d.n_end);
 	else
 		ft_make_graph(d.n_end);
-	//ft_the_killer_link(&d, d.n_end);
-
-
 	ft_generate_ant(&d);
-	//ft_print_ant(d.list_ant);
-	//printf("__________START\n");
 	ft_start(d);
-	//ft_print_ant(d.tabant[0], 1);
-	//ft_print_data(d);
+	if (d.opt.r)
+		ft_print_road(&d);
 	if (d.n_end->nb_ant != d.ant)
 		ft_error("No valid path", d);
 	return (0);

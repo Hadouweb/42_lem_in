@@ -5,13 +5,13 @@ static void ft_special_cmd(t_lst *l, t_data *d)
 	if (ft_strcmp(l->str, "##start") == 0)
 	{
 		if (!ft_is_node(l->next->str))
-			ft_error();
+			ft_error("Room start is invalid", *d);
 		d->start = l->next->str;
 	}
 	else if (ft_strcmp(l->str, "##end") == 0)
 	{
 		if (!ft_is_node(l->next->str))
-			ft_error();
+			ft_error("Room end is invalid", *d);
 		d->end = l->next->str;
 	}
 }
@@ -30,12 +30,12 @@ static void	ft_get_start_end(t_data *d)
 		if (ft_strcmp(start, n->name) == 0)
 		{
 			d->n_start = n;
-			d->n_start->id = 0;
+			d->n_start->id = -1;
 		}
 		if (ft_strcmp(end, n->name) == 0)
 		{
 			d->n_end = n;
-			d->n_end->id = -1;
+			d->n_end->id = 0;
 		}
 		n = n->next;
 	}
@@ -70,12 +70,12 @@ void		ft_parse_data(t_lst **l, t_data *d)
 		else if (ft_is_cmd(lst->str) > 0)
 			;
 		else
-			ft_error();
+			ft_error("Unspecified error", *d);
 		lst = lst->next;
 		i++;
 	}
 	if (!d->start || !d->end)
-		ft_error();
+		ft_error("Start or end is missing", *d);
 	ft_get_start_end(d);
 	ft_verif_double_name(d);
 }

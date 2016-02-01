@@ -1,46 +1,35 @@
 #include "lem_in.h"
 
-void	ft_print_node(t_node *n)
+void 	ft_print_link(t_link *link)
 {
-	t_link	*link;
-	t_node	*child;
-
-	link = n->link;
-	child = NULL;
-	ft_putstr(n->name);
-	ft_putstr(" id:");
-	ft_putnbr(n->id);
-	ft_putstr(" [dist: ");
-	ft_putnbr(n->dist);
-	ft_putchar(']');
-	ft_putstr("[nb_ant: ");
-	ft_putnbr(n->nb_ant);
-	ft_putchar(']');
-	//ft_putchar(' ');
-	//ft_putnbr(n->x);
-	//ft_putchar(' ');
-	//ft_putnbr(n->y);
-
 	if (link)
 		ft_putstr(" -> ");
 	while (link)
 	{
-		child = link->node;
-		ft_putstr(child->name);
-		ft_putstr(" [dist: ");
-		ft_putnbr(child->dist);
-		ft_putchar(']');
-		ft_putstr("[nb_ant: ");
-		ft_putnbr(child->nb_ant);
-		ft_putchar(']');
-		//ft_putchar(' ');
-		//ft_putnbr(child->x);
-		//ft_putchar(' ');
-		//ft_putnbr(child->y);
+		ft_putstr("\e[45m ");
+		ft_putstr("NAME: ");
+		ft_putstr(link->node->name);
+		ft_putstr(" | ID: [");
+		ft_putnbr(link->node->id);
+		ft_putstr("] | DIST: ");
+		ft_putnbr(link->node->dist);
 		if (link->next_l)
-			ft_putstr(", ");
+			ft_putstr(" \e[0m | ");
 		link = link->next_l;
 	}
+	ft_putstr(" \e[0m");
+}
+
+void	ft_print_node(t_node *n)
+{
+	ft_putstr("\e[44m NAME: ");
+	ft_putstr(n->name);
+	ft_putstr(" | ID: [");
+	ft_putnbr(n->id);
+	ft_putstr("] | DIST: ");
+	ft_putnbr(n->dist);
+	ft_putstr(" \e[0m");
+	ft_print_link(n->link);
 	ft_putchar('\n');
 }
 

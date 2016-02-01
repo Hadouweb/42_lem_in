@@ -15,6 +15,7 @@ static t_node	*ft_create_node(char *str, int r)
 	node->dist = 0;
 	node->nb_ant = 0;
 	node->link = NULL;
+	node->used = 0;
 	node->id = r;
 	return (node);
 }

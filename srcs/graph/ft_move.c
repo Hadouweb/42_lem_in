@@ -63,7 +63,7 @@ static t_node	*ft_get_the_smallest(t_link *link)
 	return (sml);
 }
 
-static t_node	*ft_get_start_node(t_node *node, t_node *end)
+t_node	*ft_get_start_node(t_node *node, t_node *end)
 {
 	t_link	*link;
 	t_node	*best;
@@ -96,7 +96,7 @@ static t_node	*ft_get_start_node(t_node *node, t_node *end)
 	return (best);
 }
 
-static int 		ft_move(t_ant *ant, t_data d, int *space)
+int 		ft_move(t_ant *ant, t_data d, int *space)
 {
 	t_node	*best_node;
 	int 	forward;
@@ -113,6 +113,7 @@ static int 		ft_move(t_ant *ant, t_data d, int *space)
 		{
 			ant->node->nb_ant -= 1;
 			best_node->nb_ant += 1;
+			best_node->used = 1;
 			ant->node = best_node;
 			forward = 1;
 			ft_print_ant(*ant, *space);
