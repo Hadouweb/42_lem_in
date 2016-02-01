@@ -60,14 +60,17 @@ typedef struct 		s_option
 	char 			o;
 	char 			s;
 	char 			g;
+	char 			a;
 }					t_option;
 
 typedef struct 		s_data
 {
 	int				ant;
+	char 			*tmp_ant;
 	t_node			*graph;
 	char			*start;
 	char			*end;
+	int 			step;
 	t_node			*n_start;
 	t_node			*n_end;
 	t_ant			*tabant;
@@ -91,7 +94,7 @@ void			ft_push_node(char *str, t_node **graph, int r);
 void			ft_push_link(t_node *parent, t_node *child);
 void 			ft_del_link(t_link **lst, char *link);
 
-void			ft_start(t_data d);
+void			ft_start(t_data *d);
 
 int 			ft_count_link(t_node *n);
 t_node			*ft_utmost(t_node *n, t_node *origin);

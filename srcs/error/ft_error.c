@@ -19,6 +19,8 @@ void 	ft_is_ant(char *str, t_data *d)
 	long long	nbr;
 
 	i = 0;
+	if (d->tmp_ant)
+		str = d->tmp_ant;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
@@ -30,7 +32,9 @@ void 	ft_is_ant(char *str, t_data *d)
 	if (!(nbr > 0 && nbr <= 2147483647))
 		ft_error("The number of ants is invalid", *d);
 	else
+	{
 		d->ant = nbr;
+	}
 }
 
 int 	ft_is_cmd(char *str)

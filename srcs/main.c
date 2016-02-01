@@ -10,6 +10,7 @@ static void	ft_init_data(t_data *d)
 	d->n_start = NULL;
 	d->n_end = NULL;
 	d->tabant = NULL;
+	d->step = 0;
 }
 
 void 		ft_print_options(void)
@@ -21,6 +22,7 @@ void 		ft_print_options(void)
 	ft_putstr("\to : print the solution quickly\n");
 	ft_putstr("\ts : print the number of steps\n");
 	ft_putstr("\tg : print the solution with random map (1-500 rooms, 1-1000 ants)\n");
+	ft_putstr("\ta : force the number of ant : -a number\n");
 	ft_putchar('\n');
 	exit(1);
 }
@@ -52,6 +54,8 @@ void		ft_parse_options(char *options, t_data *d)
 				d->opt.s = 1;
 			else if (options[i] == 'g')
 				d->opt.g = 1;
+			else if (options[i] == 'a')
+				d->opt.a = 1;
 			else
 			{
 				ft_putstr("lem-in: illegal option\n");
@@ -79,8 +83,6 @@ void		ft_options(t_data *d)
 {
 	if (d->opt.h )
 		ft_print_options();
-	if (d->opt.s)
-		printf("Pouet\n");
 	if (d->opt.g)
 		printf("Pouet\n");
 }
@@ -101,7 +103,13 @@ int			main(int ac, char **av)
 	{
 		while (i < ac)
 		{
-			ft_parse_options(av[i], &d);
+			if (d.opt.a)
+			{
+				d.tmp_ant = ft_strdup(av[i]);
+				d.opt.a = 0;
+			}
+			else
+				ft_parse_options(av[i], &d);
 			i++;
 		}
 		ft_options(&d);
@@ -121,9 +129,11 @@ int			main(int ac, char **av)
 	else
 		ft_make_graph(d.n_end);
 	ft_generate_ant(&d);
-	ft_start(d);
+	ft_start(&d);
 	if (d.opt.r)
 		ft_print_road(&d);
+	if (d.opt.s)
+		printf("\n\e[0;102m \e[1;30mSTEPS : %d \e[0m\n", d.step);
 	if (d.n_end->nb_ant != d.ant)
 		ft_error("No valid path", d);
 	return (0);

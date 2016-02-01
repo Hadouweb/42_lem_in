@@ -123,7 +123,7 @@ int 		ft_move(t_ant *ant, t_data d, int *space)
 	return (forward);
 }
 
-void			ft_start(t_data d)
+void			ft_start(t_data *d)
 {
 	t_ant	*ant;
 	int 	i;
@@ -133,20 +133,23 @@ void			ft_start(t_data d)
 
 	i = 0;
 	forward = 1;
-	ant = d.tabant;
+	ant = d->tabant;
 	j = 0;
-	while (forward && d.n_end->nb_ant != d.ant)
+	while (forward && d->n_end->nb_ant != d->ant)
 	{
 		forward = 0;
 		i = 0;
 		space = 0;
-		while (i < d.ant)
+		while (i < d->ant)
 		{
-			forward += ft_move(&ant[i], d, &space);
+			forward += ft_move(&ant[i], *d, &space);
 			i++;
 		}
 		if (forward)
+		{
+			d->step += 1;
 			ft_putstr("\n");
+		}
 		i = 0;
 	}
 }
