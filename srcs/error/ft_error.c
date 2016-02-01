@@ -25,9 +25,9 @@ void	ft_error(char *str, t_data d)
 	exit(1);
 }
 
-void 	ft_is_ant(char *str, t_data *d)
+void	ft_is_ant(char *str, t_data *d)
 {
-	int 		i;
+	int			i;
 	long long	nbr;
 
 	i = 0;
@@ -39,7 +39,6 @@ void 	ft_is_ant(char *str, t_data *d)
 			ft_error("The number of ants is invalid", *d);
 		i++;
 	}
-
 	nbr = ft_atoi(str);
 	if (!(nbr > 0 && nbr <= 2147483647))
 		ft_error("The number of ants is invalid", *d);
@@ -49,9 +48,9 @@ void 	ft_is_ant(char *str, t_data *d)
 	}
 }
 
-int 	ft_is_cmd(char *str)
+int		ft_is_cmd(char *str)
 {
-	int 	i;
+	int		i;
 
 	i = 0;
 	while (str[i] && str[i] == '#')
@@ -63,7 +62,7 @@ void	ft_verif_double(t_lst *lst, t_data d)
 {
 	t_lst	*l;
 	t_lst	*r;
-	int 	i;
+	int		i;
 
 	l = lst;
 	while (l)
@@ -72,7 +71,8 @@ void	ft_verif_double(t_lst *lst, t_data d)
 		i = 0;
 		while (r)
 		{
-			if (ft_strcmp(l->str, r->str) == 0 && (l->str[0] != '#' || ft_is_cmd(l->str) == 2))
+			if (ft_strcmp(l->str, r->str) == 0 &&
+				(l->str[0] != '#' || ft_is_cmd(l->str) == 2))
 				i++;
 			r = r->next;
 		}
@@ -86,7 +86,7 @@ void	ft_verif_double_name(t_data *d)
 {
 	t_node	*l;
 	t_node	*r;
-	int 	i;
+	int		i;
 
 	l = d->graph;
 	while (l)
