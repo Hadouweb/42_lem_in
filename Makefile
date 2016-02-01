@@ -27,6 +27,7 @@ SRC = 	$(SRCPATH)/main.c\
 		$(GRAPHPATH)/ft_make_graph.c\
 		$(GRAPHPATH)/ft_make_util.c\
 		$(GRAPHPATH)/ft_move.c\
+		$(GRAPHPATH)/ft_move_util.c\
 
 OBJ = $(SRC:.c=.o)
 

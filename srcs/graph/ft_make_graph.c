@@ -19,7 +19,7 @@ void	ft_make_graph(t_node *n)
 	link = n->link;
 	while (link)
 	{
-		if ((link->node->dist == 0 || link->node->dist > n->dist) && 
+		if ((link->node->dist == 0 || link->node->dist > n->dist) &&
 			link->node->id != -1 && link->node->id != 0)
 		{
 			link->node->dist = n->dist + 1;
@@ -29,7 +29,6 @@ void	ft_make_graph(t_node *n)
 	}
 }
 
-
 int		ft_make_graph_fast(t_node *n)
 {
 	t_link	*link;
@@ -37,7 +36,7 @@ int		ft_make_graph_fast(t_node *n)
 	link = n->link;
 	while (link)
 	{
-		if (link->node->dist == 0 && 
+		if (link->node->dist == 0 &&
 			link->node->id != -1 && link->node->id != 0)
 		{
 			link->node->dist = n->dist + 1;
