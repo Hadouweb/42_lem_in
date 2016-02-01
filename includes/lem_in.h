@@ -51,6 +51,16 @@ typedef struct 		s_ant
 	struct s_ant	*next;
 }					t_ant;
 
+typedef struct 		s_option
+{
+	char 			h;
+	char 			e;
+	char 			r;
+	char 			o;
+	char 			s;
+	char 			g;
+}					t_option;
+
 typedef struct 		s_data
 {
 	int				ant;
@@ -60,6 +70,7 @@ typedef struct 		s_data
 	t_node			*n_start;
 	t_node			*n_end;
 	t_ant			*tabant;
+	t_option 		opt;
 }					t_data;
 
 int 			ft_is_number(char *str, int i);

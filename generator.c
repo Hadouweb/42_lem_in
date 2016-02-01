@@ -51,7 +51,7 @@ void	ft_print_link(int size, int density)
 		j = 0;
 		while (j < size)
 		{
-			if (density > rand() % 100)
+			if (density > rand() % 50)
 			{
 				ft_putnbr(i);
 				write(1, "-", 1);
