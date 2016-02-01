@@ -103,10 +103,10 @@ int 			ft_is_name(char *str, int i);
 int 			ft_is_node(char *str);
 int 			ft_is_link(char *str, t_node *graph);
 
-void			ft_error();
+void			ft_error(char *str, t_data d);
 void 			ft_is_ant(char *str, t_data *d);
 int 			ft_is_cmd(char *str);
-void			ft_verif_double(t_lst *lst);
+void			ft_verif_double(t_lst *lst, t_data d);
 void			ft_verif_double_name(t_data *d);
 
 #endif

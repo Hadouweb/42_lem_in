@@ -66,8 +66,6 @@ void		ft_options(t_data *d)
 {
 	if (d->opt.h )
 		ft_print_options();
-	if (d->opt.e)
-		printf("Pouet\n");
 	if (d->opt.r)
 		printf("Pouet\n");
 	if (d->opt.o)
@@ -106,7 +104,7 @@ int			main(int ac, char **av)
 		ft_strdel(&line);
 		i++;
 	}
-	//ft_verif_double(lst);
+	ft_verif_double(lst, d);
 	ft_parse_data(&lst, &d);
 
 	//ft_print_data(d);
@@ -124,6 +122,6 @@ int			main(int ac, char **av)
 	//ft_print_ant(d.tabant[0], 1);
 	//ft_print_data(d);
 	if (d.n_end->nb_ant != d.ant)
-		ft_error();
+		ft_error("No valid path", d);
 	return (0);
 }
