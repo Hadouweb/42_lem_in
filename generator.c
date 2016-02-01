@@ -74,7 +74,6 @@ int		main(int ac, char **av)
 	int		end;
 
 	srand(time(NULL));
-
 	if (ac != 4)
 	{
 		ft_putstr("usage : size(rooms) density(percent) nb_of_ant");
